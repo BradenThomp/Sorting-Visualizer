@@ -4,8 +4,10 @@ import time
 
 
 class Sorter(ABC):
+
     def __init__(self, screen):
         self.screen = screen
+        self.is_complete = False
         super().__init__()
 
     def updatescreen(self, data):

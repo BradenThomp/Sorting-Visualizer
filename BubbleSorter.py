@@ -25,6 +25,10 @@ class BubbleSorter(Sorter):
                 self.j = 0
                 self.i = self.i + 1
 
+        else:
+            self.is_complete = True
+            print("sorted")
+
 
 
 

@@ -4,7 +4,6 @@ import pygame
 
 class Data:
 
-    my_list = []
     WHITE = (255,255,255)
 
     def populatelist(self):
@@ -12,9 +11,17 @@ class Data:
             self.my_list.append(randint(self.min, self.max))
 
     def __init__(self, min, max, size):
-        self.min = min;
-        self.max = max;
-        self.size = size;
+        self.min = min
+        self.max = max
+        self.size = size
+        self.my_list = []
+        self.populatelist()
+
+    def randomize(self, min, max, size):
+        self.min = min
+        self.max = max
+        self.size = size
+        self.my_list.clear()
         self.populatelist()
 
     def draw(self, screen):
