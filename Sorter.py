@@ -14,7 +14,7 @@ class Sorter(ABC):
         self.screen.fill((0, 0, 0))
         data.draw(self.screen)
         pygame.display.update()
-        time.sleep(0.5)
+        time.sleep(0.2)
 
     @abstractmethod
     def sort(self, data):

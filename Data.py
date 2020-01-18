@@ -1,10 +1,9 @@
 from random import randint
 import pygame
+from Colors import *
 
 
 class Data:
-
-    WHITE = (255,255,255)
 
     def populatelist(self):
         for i in range(0, self.size):
@@ -27,4 +26,6 @@ class Data:
     def draw(self, screen):
         for i in range(0, self.size):
             height = self.my_list[i]
-            pygame.draw.rect(screen, self.WHITE, (50 + i*51, 200, 50, height))
+            pygame.draw.rect(screen, BLACK, (50 + i*50, 600, 50, -height))
+            pygame.draw.rect(screen, WHITE, (51 + i*50, 600, 48, -height))
+

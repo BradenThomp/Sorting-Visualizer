@@ -20,7 +20,7 @@ class Application:
 
         self.sorter = 0
 
-        self.data = Data(0, 40, 10)
+        self.data = Data(0, 40, 17)
 
     def run(self):
         show_menu = True
@@ -60,25 +60,8 @@ class Application:
         self.selection_sorter_button.draw(self.screen)
 
     def prepare_data_interface(self):
-        self.data.randomize(0, 40, 10)
+        self.data.randomize(40, 300, 18)
         return False
-
-    def event_handler(self):
-        for event in pygame.event.get():
-            pos = pygame.mouse.get_pos()
-
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.bubble_sorter_button.isover(pos) and show_menu:
-                    show_menu = self.prepare_data_interface()
-                    self.sorter = BubbleSorter(self.screen)
-
-                if self.selection_sorter_button.isover(pos) and show_menu:
-                    show_menu = self.prepare_data_interface()
-                    self.sorter = SelectionSorter(self.screen)
 
 
 def main():
