@@ -1,20 +1,26 @@
 from abc import ABC, abstractmethod
-import pygame
+import pygame, sys
 import time
 
 
 class Sorter(ABC):
 
-    def __init__(self, screen):
-        self.screen = screen
+    def __init__(self, window):
+        self.window = window
         self.is_complete = False
         super().__init__()
 
-    def updatescreen(self, data):
-        self.screen.fill((0, 0, 0))
-        data.draw(self.screen)
+    def force_update(self, data):
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        self.window.fill((0, 0, 0))
+        data.draw(self.window)
         pygame.display.update()
-        time.sleep(0.2)
+        time.sleep(0.02)
 
     @abstractmethod
     def sort(self, data):

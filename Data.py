@@ -5,7 +5,7 @@ from Colors import *
 
 class Data:
 
-    def populatelist(self):
+    def populate_list(self):
         for i in range(0, self.size):
             self.my_list.append(randint(self.min, self.max))
 
@@ -14,18 +14,18 @@ class Data:
         self.max = max
         self.size = size
         self.my_list = []
-        self.populatelist()
+        self.populate_list()
 
     def randomize(self, min, max, size):
         self.min = min
         self.max = max
         self.size = size
         self.my_list.clear()
-        self.populatelist()
+        self.populate_list()
 
     def draw(self, screen):
         for i in range(0, self.size):
             height = self.my_list[i]
-            pygame.draw.rect(screen, BLACK, (50 + i*50, 600, 50, -height))
-            pygame.draw.rect(screen, WHITE, (51 + i*50, 600, 48, -height))
+            pygame.draw.rect(screen, BLACK, (25 + i*25, 600, 25, -height))
+            pygame.draw.rect(screen, WHITE, (26 + i*25, 600, 24, -height))
 
