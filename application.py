@@ -37,23 +37,26 @@ class Application:
                 pygame.quit()
                 sys.exit()
 
+            # checks if any GUI button has been pressed
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if Application.randomize_data_button.isover(pos):
+                if Application.randomize_data_button.is_over(pos):
                     Application.data.randomize(10, 300, 64)
-                if Application.bubble_sorter_button.isover(pos):
+                if Application.bubble_sorter_button.is_over(pos):
                     Application.run_sort(BubbleSorter(Application.window))
-                if Application.selection_sorter_button.isover(pos):
+                if Application.selection_sorter_button.is_over(pos):
                     Application.run_sort(SelectionSorter(Application.window))
-                if Application.insertion_sorter_button.isover(pos):
+                if Application.insertion_sorter_button.is_over(pos):
                     Application.run_sort(InsertionSorter(Application.window))
-                if Application.merge_sorter_button.isover(pos):
+                if Application.merge_sorter_button.is_over(pos):
                     Application.run_sort(MergeSorter(Application.window))
-                if Application.quick_sorter_button.isover(pos):
+                if Application.quick_sorter_button.is_over(pos):
                     Application.run_sort(QuickSorter(Application.window))
 
     @staticmethod
     def update_window():
+        # clear window
         Application.window.fill((0, 0, 0))
+        # redraw buttons
         Application.randomize_data_button.draw(Application.window)
         Application.bubble_sorter_button.draw(Application.window)
         Application.selection_sorter_button.draw(Application.window)
@@ -61,8 +64,11 @@ class Application:
         Application.merge_sorter_button.draw(Application.window)
         Application.quick_sorter_button.draw(Application.window)
         Application.data.draw(Application.window)
+        # refresh display
         pygame.display.update()
 
+    # sorter is any sorting algorithm extended from the abstract class Sorter
+    # hides menu and starts sorting algorithm
     @staticmethod
     def run_sort(sorter):
         Application.sorter = sorter
@@ -72,6 +78,7 @@ class Application:
 def main():
     Application.initialize()
 
+    # application super loop
     while 1:
         Application.handle_events()
 

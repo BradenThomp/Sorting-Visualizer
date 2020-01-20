@@ -4,33 +4,29 @@ from Sorter import Sorter
 class QuickSorter(Sorter):
 
     def sort(self, data):
-        self.quickSortIterative(data, 0, 63)
+        self.quick_sort_iterative(data, 0, 63)
 
-    # This function is same in both iterative and recursive
-    def partition(self, data, l, h):
-        i = (l - 1)
-        x = data.my_list[h]
+    # sorts a partition
+    def partition(self, data, starting_index, ending_index):
+        i = (starting_index - 1)
+        x = data.my_list[ending_index]
 
-        for j in range(l, h):
+        for j in range(starting_index, ending_index):
             if data.my_list[j].height <= x.height:
                 # increment index of smaller element
                 i = i + 1
                 data.my_list[i], data.my_list[j] = data.my_list[j], data.my_list[i]
                 self.force_update(data)
 
-        data.my_list[i + 1], data.my_list[h] = data.my_list[h], data.my_list[i + 1]
+        data.my_list[i + 1], data.my_list[ending_index] = data.my_list[ending_index], data.my_list[i + 1]
         self.force_update(data)
         return i + 1
 
-        # Function to do Quick sort
-
-    # arr[] --> Array to be sorted,
-    # l  --> Starting index,
-    # h  --> Ending index
-    def quickSortIterative(self, data, l, h):
+    # data: Array to be sorted
+    def quick_sort_iterative(self, data, starting_index, ending_index):
 
         # Create an auxiliary stack
-        size = h - l + 1
+        size = ending_index - starting_index + 1
         stack = [0] * size
 
         # initialize top of stack
@@ -38,35 +34,35 @@ class QuickSorter(Sorter):
 
         # push initial values of l and h to stack
         top = top + 1
-        stack[top] = l
+        stack[top] = starting_index
         top = top + 1
-        stack[top] = h
+        stack[top] = ending_index
 
         # Keep popping from stack while is not empty
         while top >= 0:
 
             # Pop h and l
-            h = stack[top]
+            ending_index = stack[top]
             top = top - 1
-            l = stack[top]
+            starting_index = stack[top]
             top = top - 1
 
             # Set pivot element at its correct position in
             # sorted array
-            p = self.partition(data, l, h)
+            p = self.partition(data, starting_index, ending_index)
 
             # If there are elements on left side of pivot,
             # then push left side to stack
-            if p - 1 > l:
+            if p - 1 > starting_index:
                 top = top + 1
-                stack[top] = l
+                stack[top] = starting_index
                 top = top + 1
                 stack[top] = p - 1
 
             # If there are elements on right side of pivot,
             # then push right side to stack
-            if p + 1 < h:
+            if p + 1 < ending_index:
                 top = top + 1
                 stack[top] = p + 1
                 top = top + 1
-                stack[top] = h
+                stack[top] = ending_index

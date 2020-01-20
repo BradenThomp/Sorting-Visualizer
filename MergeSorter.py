@@ -38,8 +38,6 @@ class MergeSorter(Sorter):
             # multiple of 2
             current_size = 2 * current_size
 
-            # Merge Function
-
     def merge(self, data, l, m, r):
         n1 = m - l + 1
         n2 = r - m

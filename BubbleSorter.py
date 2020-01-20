@@ -3,6 +3,7 @@ from Sorter import Sorter
 
 class BubbleSorter(Sorter):
 
+    # data: data to be sorted
     def sort(self, data):
         length = data.size
 
