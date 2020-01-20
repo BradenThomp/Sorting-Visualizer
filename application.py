@@ -6,6 +6,7 @@ from Data import Data
 from BubbleSorter import BubbleSorter
 from SelectionSorter import SelectionSorter
 from InsertionSorter import InsertionSorter
+from MergeSorter import MergeSorter
 
 
 class Application:
@@ -17,12 +18,14 @@ class Application:
     bubble_sorter_button = Button(BLACK, 175, 25, 125, 25, 'Bubble Sort', WHITE)
     selection_sorter_button = Button(BLACK, 325, 25, 125, 25, 'Selection Sort', WHITE)
     insertion_sorter_button = Button(BLACK, 475, 25, 125, 25, 'Insertion Sort', WHITE)
+    merge_sorter_button = Button(BLACK, 625, 25, 125, 25, 'Merge Sort', WHITE)
+    quick_sorter_button = Button(BLACK, 775, 25, 125, 25, 'Quick Sort', WHITE)
 
     @staticmethod
     def initialize():
         pygame.init()
-        Application.window = pygame.display.set_mode((1000, 900))
-        Application.data = Data(10, 300, 30)
+        Application.window = pygame.display.set_mode((925, 650))
+        Application.data = Data(10, 300, 64)
 
     @staticmethod
     def handle_events():
@@ -35,13 +38,17 @@ class Application:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Application.randomize_data_button.isover(pos):
-                    Application.data.randomize(10, 300, 30)
+                    Application.data.randomize(10, 300, 64)
                 if Application.bubble_sorter_button.isover(pos):
                     Application.run_sort(BubbleSorter(Application.window))
                 if Application.selection_sorter_button.isover(pos):
                     Application.run_sort(SelectionSorter(Application.window))
                 if Application.insertion_sorter_button.isover(pos):
                     Application.run_sort(InsertionSorter(Application.window))
+                if Application.merge_sorter_button.isover(pos):
+                    Application.run_sort(MergeSorter(Application.window))
+                if Application.quick_sorter_button.isover(pos):
+                    pass
 
     @staticmethod
     def update_window():
@@ -50,6 +57,8 @@ class Application:
         Application.bubble_sorter_button.draw(Application.window)
         Application.selection_sorter_button.draw(Application.window)
         Application.insertion_sorter_button.draw(Application.window)
+        Application.merge_sorter_button.draw(Application.window)
+        Application.quick_sorter_button.draw(Application.window)
         Application.data.draw(Application.window)
         pygame.display.update()
 

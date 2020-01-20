@@ -11,7 +11,7 @@ class InsertionSorter(Sorter):
             key = data.my_list[i]
 
             j = i-1
-            while j >= 0 and key < data.my_list[j]:
+            while j >= 0 and key.height < data.my_list[j].height:
                 data.my_list[j+1] = data.my_list[j]
                 j -= 1
                 self.force_update(data)
