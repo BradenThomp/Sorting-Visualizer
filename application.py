@@ -7,6 +7,7 @@ from BubbleSorter import BubbleSorter
 from SelectionSorter import SelectionSorter
 from InsertionSorter import InsertionSorter
 from MergeSorter import MergeSorter
+from QuickSorter import QuickSorter
 
 
 class Application:
@@ -48,7 +49,7 @@ class Application:
                 if Application.merge_sorter_button.isover(pos):
                     Application.run_sort(MergeSorter(Application.window))
                 if Application.quick_sorter_button.isover(pos):
-                    pass
+                    Application.run_sort(QuickSorter(Application.window))
 
     @staticmethod
     def update_window():
