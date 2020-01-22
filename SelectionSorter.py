@@ -15,7 +15,7 @@ class SelectionSorter(Sorter):
                     min_index = j
 
             data.my_list[i], data.my_list[min_index] = data.my_list[min_index], data.my_list[i]
-            self.force_update(data)
+            self.force_update()
 
 
 

@@ -1,6 +1,4 @@
 from DataPoint import DataPoint
-import pygame
-from Colors import *
 
 
 # store and array of data so it can be easily drawn on screen

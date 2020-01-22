@@ -33,3 +33,6 @@ class Button:
                 return True
 
         return False
+
+    def perform_function(self):
+        pass

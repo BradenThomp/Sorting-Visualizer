@@ -1,8 +1,10 @@
-import sys
 import pygame
-from Button import Button
+from SorterButton import SorterButton
+from RandomizeButton import RandomizeButton
 from Colors import *
 from Data import Data
+from EventHandler import EventHandler
+from Renderer import Renderer
 from BubbleSorter import BubbleSorter
 from SelectionSorter import SelectionSorter
 from InsertionSorter import InsertionSorter
@@ -12,77 +14,43 @@ from QuickSorter import QuickSorter
 
 class Application:
 
-    window = None
     sorter = None
-    data = None
-    randomize_data_button = Button(BLACK, 25, 25, 125, 25, 'Randomize Data', WHITE)
-    bubble_sorter_button = Button(BLACK, 175, 25, 125, 25, 'Bubble Sort', WHITE)
-    selection_sorter_button = Button(BLACK, 325, 25, 125, 25, 'Selection Sort', WHITE)
-    insertion_sorter_button = Button(BLACK, 475, 25, 125, 25, 'Insertion Sort', WHITE)
-    merge_sorter_button = Button(BLACK, 625, 25, 125, 25, 'Merge Sort', WHITE)
-    quick_sorter_button = Button(BLACK, 775, 25, 125, 25, 'Quick Sort', WHITE)
 
-    @staticmethod
-    def initialize():
+    def __init__(self, window):
         pygame.init()
-        Application.window = pygame.display.set_mode((925, 650))
-        Application.data = Data(10, 300, 64)
+        self.window = window
+        self.event_handler = EventHandler()
+        self.renderer = Renderer(window)
+        self.data = Data(10, 300, 64)
+        self.buttons = [RandomizeButton(BLACK, 25, 25, 125, 25, 'Randomize Data', WHITE, self.data),
+                        SorterButton(BLACK, 175, 25, 125, 25, 'Bubble Sort', WHITE, BubbleSorter(self.renderer), self.data),
+                        SorterButton(BLACK, 325, 25, 125, 25, 'Selection Sort', WHITE, SelectionSorter(self.renderer), self.data),
+                        SorterButton(BLACK, 475, 25, 125, 25, 'Insertion Sort', WHITE, InsertionSorter(self.renderer), self.data),
+                        SorterButton(BLACK, 625, 25, 125, 25, 'Merge Sort', WHITE, MergeSorter(self.renderer), self.data),
+                        SorterButton(BLACK, 775, 25, 125, 25, 'Quick Sort', WHITE, QuickSorter(self.renderer), self.data)
+                        ]
+        self.event_handler.register_buttons(self.buttons)
+        self.renderer.register_buttons(self.buttons)
+        self.renderer.register_data(self.data)
 
-    @staticmethod
-    def handle_events():
-        for event in pygame.event.get():
-            pos = pygame.mouse.get_pos()
+    def run(self):
+        while 1:
+            # check if any new events have occured
+            self.event_handler.handle_events()
 
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+            # render window
+            self.renderer.refresh()
+            self.renderer.render_buttons()
+            self.renderer.render_data()
 
-            # checks if any GUI button has been pressed
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if Application.randomize_data_button.is_over(pos):
-                    Application.data.randomize(10, 300, 64)
-                if Application.bubble_sorter_button.is_over(pos):
-                    Application.run_sort(BubbleSorter(Application.window))
-                if Application.selection_sorter_button.is_over(pos):
-                    Application.run_sort(SelectionSorter(Application.window))
-                if Application.insertion_sorter_button.is_over(pos):
-                    Application.run_sort(InsertionSorter(Application.window))
-                if Application.merge_sorter_button.is_over(pos):
-                    Application.run_sort(MergeSorter(Application.window))
-                if Application.quick_sorter_button.is_over(pos):
-                    Application.run_sort(QuickSorter(Application.window))
-
-    @staticmethod
-    def update_window():
-        # clear window
-        Application.window.fill((0, 0, 0))
-        # redraw buttons
-        Application.randomize_data_button.draw(Application.window)
-        Application.bubble_sorter_button.draw(Application.window)
-        Application.selection_sorter_button.draw(Application.window)
-        Application.insertion_sorter_button.draw(Application.window)
-        Application.merge_sorter_button.draw(Application.window)
-        Application.quick_sorter_button.draw(Application.window)
-        Application.data.draw(Application.window)
-        # refresh display
-        pygame.display.update()
-
-    # sorter is any sorting algorithm extended from the abstract class Sorter
-    # hides menu and starts sorting algorithm
-    @staticmethod
-    def run_sort(sorter):
-        Application.sorter = sorter
-        Application.sorter.sort(Application.data)
+            # update display
+            pygame.display.update()
 
 
 def main():
-    Application.initialize()
-
-    # application super loop
-    while 1:
-        Application.handle_events()
-
-        Application.update_window()
+    window = pygame.display.set_mode((925, 650))
+    app = Application(window)
+    app.run()
 
 
 if __name__ == "__main__":

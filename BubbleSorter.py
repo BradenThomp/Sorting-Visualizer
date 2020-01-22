@@ -11,7 +11,7 @@ class BubbleSorter(Sorter):
             for j in range(0, length - i - 1):
                 if data.my_list[j].height > data.my_list[j+1].height:
                     data.my_list[j], data.my_list[j + 1] = data.my_list[j+1], data.my_list[j]
-                    self.force_update(data)
+                    self.force_update()
 
 
 

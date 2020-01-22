@@ -16,10 +16,10 @@ class QuickSorter(Sorter):
                 # increment index of smaller element
                 i = i + 1
                 data.my_list[i], data.my_list[j] = data.my_list[j], data.my_list[i]
-                self.force_update(data)
+                self.force_update()
 
         data.my_list[i + 1], data.my_list[ending_index] = data.my_list[ending_index], data.my_list[i + 1]
-        self.force_update(data)
+        self.force_update()
         return i + 1
 
     # data: Array to be sorted

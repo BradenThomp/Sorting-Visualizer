@@ -58,16 +58,16 @@ class MergeSorter(Sorter):
                 data.my_list[k] = L[i]
                 i += 1
             k += 1
-            self.force_update(data)
+            self.force_update()
 
         while i < n1:
             data.my_list[k] = L[i]
-            self.force_update(data)
+            self.force_update()
             i += 1
             k += 1
 
         while j < n2:
             data.my_list[k] = R[j]
-            self.force_update(data)
+            self.force_update()
             j += 1
             k += 1
