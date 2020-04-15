@@ -4,7 +4,7 @@ Sorting-Visualizer is a graphical user interface used to visual five common sort
 
 ## Installation
 
-Download zip file and use powershell or other tool to run application.
+Download zip file run application.
 
 ```
 python sorting-visualizer
