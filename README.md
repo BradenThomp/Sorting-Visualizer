@@ -4,10 +4,14 @@ Sorting-Visualizer is a graphical user interface used to visual five common sort
 
 ## Installation
 
-Download zip file run application.
+Download zip and open project in pycharm.
 
+For Windows CMD with virtual environment
 ```
-python sorting-visualizer
+cd venv/Scripts
+activate
+cd ../../
+python Application.py
 ```
 
 ## Usage
