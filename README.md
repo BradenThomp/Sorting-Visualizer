@@ -6,7 +6,9 @@ Sorting-Visualizer is a graphical user interface used to visual five common sort
 
 Download zip and open project in pycharm.
 
-For Windows CMD with virtual environment
+For running without IDE virtual environment must be activate.
+
+In Windows10 cmd this would be:
 ```
 cd venv/Scripts
 activate
